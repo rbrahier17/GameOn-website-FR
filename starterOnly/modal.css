@@ -37,6 +37,11 @@ img {
 .header-logo {
     float: left;
 }
+@media screen and (max-width: 540px ) {
+  .header-logo img {
+    max-width: 230px;
+  }
+}
 .main-navbar {
     float: right;
 }
@@ -97,7 +102,7 @@ img {
   .topnav a.icon {
     float: right;
     display: block;
-    margin-top: -15px;
+    
   }
 } 
 
@@ -111,8 +116,6 @@ main {
   margin: 1px 20px 15px;
   border-radius: 2rem;
   text-align: justify;
-
-
 }
 
 .modal-btn {
@@ -144,6 +147,7 @@ main {
   margin-top: 0.5em;
   padding: 1em;
   color: #fff;
+  border: none;
   border-radius: 15px;
   cursor: pointer;
   font-size: 16px;
@@ -171,7 +175,7 @@ main {
 
 .content {
   margin: 5% auto;
-  width: 100%;
+  width: 90%;
   max-width: 500px;
   animation-name: modalopen;
   animation-duration: var(--modal-duration);
@@ -188,13 +192,26 @@ main {
   margin: 15px auto;
 }
 
-label {
-  font-family: var(--font-default);
-  font-size: 17px;
-  font-weight: normal;
-  display: inline-block;
+fieldset {
+  border: none;
+}
+
+#quantity {
   margin-bottom: 11px;
 }
+
+.invalid-quantity {
+  margin: -11px 0 7px 0;
+}
+
+label {
+  font-family: var(--font-default);
+  font-size: 14px;
+  font-weight: normal;
+  display: inline-block;
+  margin: 11px auto;
+}
+
 input {
   padding: 8px;
   border: 0.8px solid #ccc;
@@ -208,6 +225,16 @@ input {
   font-size: 20px;
   height: 48px;
 }
+
+.invalid-message {
+  font-size: 13px;
+  font-weight: 100;
+  color: #e54858;
+  display: none;
+}
+
+
+
 .formData[data-error]::after {
   content: attr(data-error);
   font-size: 0.4em;
@@ -223,9 +250,7 @@ input {
 .formData[data-error-visible="true"]::after {
   opacity: 1;
 }
-.formData[data-error-visible="true"] .text-control {
-  border: 2px solid #e54858;
-}
+
 /* 
 input[data-error]::after {
     content: attr(data-error);
@@ -323,16 +348,31 @@ input[data-error]::after {
 }
 .btn-submit,
 .btn-signup {
-  background: #fe142f;
   display: block;
   margin: 0 auto;
   border-radius: 7px;
   font-size: 1rem;
-  padding: 12px 82px;
+  padding: 12px 50px;
   color: #fff;
   cursor: pointer;
   border: 0;
 }
+
+.btn-signup {
+  background: #fe142f;
+}
+
+.btn-submit {
+  background: grey;
+}
+
+.btn-submit:disabled {
+  background: lightgray;
+  color: black;
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
 /* custom select styles */
 .custom-select {
   position: relative;
@@ -402,7 +442,7 @@ input[data-error]::after {
 /* custom select end */
 .text-label {
   font-weight: normal;
-  font-size: 16px;
+  font-size: 14px;
 }
 .hero-section {
   min-height: 93vh;
@@ -440,6 +480,19 @@ input[data-error]::after {
   font-weight: normal;
   white-space: nowrap;
 }
+@media screen and (max-width: 1000px)  { 
+  .hero-headline {
+    font-size: 4.5rem;
+  }
+}
+@media screen and (max-width: 540px)  { 
+  .hero-content {
+    min-width: 100%;
+  }
+  .hero-headline {
+    font-size: 3.2rem;
+  }
+}
 .hero-text {
   width: 146%;
   font-weight: normal;
@@ -462,6 +515,7 @@ input[data-error]::after {
   height: 100%;
   display: block;
   padding: 0;
+  object-fit: cover;
 }
 .copyrights {
   color: #fe142f;
@@ -495,12 +549,11 @@ footer {
     display: none;
   }
   .hero-headline {
-    font-size: 4.5rem;
     white-space: normal;
   }
   .hero-text {
     width: unset;
-    font-size: 1.5rem;
+    font-size: 1.3rem;
   }
   .hero-img img {
     border-radius: 10px;
@@ -527,3 +580,23 @@ footer {
   }
 }
 
+.confirmation {
+  height: 663px;
+  display: none;
+  padding-top: 60%;
+}
+
+.confirmation p {
+ text-align: center;
+ margin: 0 auto;
+ font-size: 1.7em;
+ width: 74%;
+ font-weight: 400;
+}
+
+.close-confirmation-btn {
+  width: 170px;
+  position: absolute;
+  bottom: 20px;
+  left: calc(50% - 85px)
+}
