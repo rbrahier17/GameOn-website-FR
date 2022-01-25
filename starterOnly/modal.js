@@ -7,13 +7,13 @@ function editNav() {
   }
 }
 
-// DOM Elements (elements also used in validation.js are exported)
-        const modalbg           = document.querySelector(".bground");
-        const modalBtn          = document.querySelectorAll(".modal-btn");
-        const closeModalButtons = document.querySelectorAll(".close-modal-btn");
-export  const form              = document.querySelector("#registrationForm");
-export  const submitBtn         = document.querySelector(".btn-submit");
-export  const subConfirmation   = document.querySelector(".confirmation")
+// DOM Elements
+const modalbg           = document.querySelector(".bground");
+const modalBtn          = document.querySelectorAll(".modal-btn");
+const closeModalButtons = document.querySelectorAll(".close-modal-btn");
+const form              = document.querySelector("#registrationForm");
+const submitBtn         = document.querySelector(".btn-submit");
+const subConfirmation   = document.querySelector(".confirmation")
 
 // launch modal form
 function launchModal() {
@@ -35,7 +35,7 @@ function resetForm() {
     subConfirmation.style.display = "none" 
     form.style.display = "block"
   }
-  submitBtn .style.background = "grey"
+  submitBtn.style.background = "grey"
 }
 
 // close modal and reset form event

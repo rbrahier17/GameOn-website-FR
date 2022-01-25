@@ -7,9 +7,9 @@
     <link rel="stylesheet" href="modal.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=DM+Sans" />
-    <script type="module" src="modal.js" defer></script>
-    <script type="module" src="validation.js" defer></script>
- 
+    <script type="text/javascript" src="validation.js" defer></script>
+    <script type="text/javascript" src="modal.js" defer></script>
+
   </head>
 
   <body>
@@ -66,31 +66,31 @@
                 <div class="formData">
                   <label for="firstName">Prénom</label>
                   <input class="text-control" type="text" id="firstName" name="firstName" />
-                  <p class="invalid-message invalid-firstName">Veuillez entrer votre prénom. Il doit être composé de 2 à 30 caractères. Les chiffres et symboles spéciaux ne sont pas valides.</p>
+                  <p class="invalid-message invalid-firstName"></p>
                 </div>
 
                 <div class="formData">
                   <label for="lastName">Nom</label>
                   <input class="text-control" type="text" id="lastName" name="lastName" />
-                  <p class="invalid-message invalid-lastName">Veuillez entrer votre nom. Il doit être composé de 2 à 30 caractères. Les chiffres et symboles spéciaux ne sont pas valides.</p>
+                  <p class="invalid-message invalid-lastName"></p>
                 </div>
 
                 <div class="formData">
                   <label for="email">E-mail</label>
                   <input class="text-control" type="email" id="email" name="email" />
-                  <p class="invalid-message invalid-email">Veuillez entrer votre email en respectant un format valide. <br /> Exemple: john.doe@mail.com.</p>
+                  <p class="invalid-message invalid-email"></p>
                 </div>
 
                 <div class="formData">
                   <label for="birthdate">Date de naissance</label>
                   <input class="text-control" type="date" id="birthdate" name="birthdate" />
-                  <p class="invalid-message invalid-birthdate">Veuillez entrer votre date de naissance en respectant un format de date valide type JJ/MM/AAAA. Si votre année d'anniversaire est antérieure à 120 ans vous ne jouez probablement plus au jeux vidéos. Si  votre année de naissance est ultérieure à l'année actuelle vous n'y jouez probablement pas encore.</p>
+                  <p class="invalid-message invalid-birthdate"></p>
                 </div>
 
                 <div class="formData">
                   <label for="quantity">À combien de tournois GameOn avez-vous déjà participé?</label>
                   <input type="number" class="text-control" id="quantity" name="quantity" />
-                  <p class="invalid-message invalid-quantity">Veuillez entrer un nombre de tournois compris entre 0 et 99.</p>
+                  <p class="invalid-message invalid-quantity"></p>
                 </div>
               </fieldset>
 
@@ -134,7 +134,7 @@
                   Portland
                 </label>
                 
-                <p class="invalid-message invalid-locationFieldset">Veuillez sélectionner une option dans la liste. </p>
+                <p class="invalid-message invalid-locationFieldset"></p>
               </fieldset>
 
               <!-----------conditions fieldset------------->
@@ -146,7 +146,7 @@
                   J'ai lu et accepté les conditions d'utilisation.
                 </label>
 
-                <p class="invalid-message invalid-checkbox1">Veuillez accepter les conditions d'utilisation. </p>
+                <p class="invalid-message invalid-checkbox1"></p>
 
                 <br />
 
