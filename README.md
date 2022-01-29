@@ -1,5 +1,10 @@
-# Projet GameOn
-1. Forkez ce repo ;
-2. Il est conseillé d'utiliser VisualStudio Code et vous pouvez utiliser Docker, mais ce n'est pas obligatoire ;
-3. Il n'y a aucune dépendance ;
-4. Vous ne devez utiliser que du CSS personnalisé et du JavaScript pur, sans jQuery, Bootstrap ou autre librairie.
+GAME ON PROJECT 
+
+OPENCLASSROOMS PROJECT N°4 from JavaScript React Developer training path
+
+The main mission of this project is to manage form validation with Javascript. 
+The base code of this project was extracted from this repo: https://github.com/OpenClassrooms-Student-Center/GameOn-website-FR 
+
+-The modal.js file manage modal interactions
+-The validation.js file manage all the form validation process
+
