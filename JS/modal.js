@@ -34,6 +34,7 @@ function resetForm() {
   const invalidMessages = document.querySelectorAll(".invalid-message")
   const mainFields      = document.querySelectorAll(".main-field")
   const submitBtn       = document.querySelector(".btn-submit");
+  validInputsSet = new Set([]);
   form.reset()
   if (subConfirmation.style.display = "block") {
     subConfirmation.style.display = "none" 
