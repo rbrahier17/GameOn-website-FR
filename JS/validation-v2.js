@@ -1,0 +1,245 @@
+/** 
+ * THIS FILE MANAGE ALL THE FORM VALIDATION 
+ * The objective is to have all the validation logic in this file, without rely on HTML attributes as much as possible. 
+ * REASONS: 
+ * - Keep a clear separation between the structure of the web page in the HTML and the validation logic side in the javascript file.
+ * - Build a personalized validation to improve user experience.
+ * - Have more control over validation without being dependent on another program (like browser-implemented validation).
+ * - Uderstand how works form validation process and practice javascript as much as possible in this project.
+ *
+ * SUMMARY:
+ * - 1. UTILITY FUNCTIONS
+ * - 2. SETUP INPUTS DATAS AND METHODS
+ * - 3. GLOBAL FORM VALIDATION FUNCTIONS
+ * - 4. INITIALIZE VALIDATION
+ */
+
+
+// 1. UTILITY FUNCTIONS
+
+/**
+ * This function accept an HTMLInputElement that is supposed to receive a string type value
+ * and return wheter or not this input is empty
+ * @param {HTMLInputElement} input 
+ * @returns {boolean}
+ */
+function isEmpty(input) {
+  return input.value.trim().length === 0;
+}
+
+/**
+ * On some navigators, with HTMLInputElement attribute type="date" it is possible to enter a year containing up to 6 digits.
+ * But the format requires a 4-digit year, this function solves -partially- this problem.
+ * If the date input value contains more than 10 chars, the value is sliced to respect the expected format.
+ */
+function preventEnterInvalidDateFormat() {
+  const dateInput = document.querySelector("input[type=date]")
+  dateInput.addEventListener("input", (e) => {
+    if (e.target.value.length > 10) {
+      e.target.value = `${e.target.value.slice(0,4)}${e.target.value.slice(5,11)}`
+    }
+  })
+}
+
+/**
+ * This function inject text in an HTMLParagraphElement related to the HTMLInputElement parameter
+ * It displays this paragraph and it also applies a red border to the input
+ * @param {HTMLInputElement} input 
+ * @param {string} invalidMsg 
+ */
+function displayInvalidMsg(input, invalidMsg) {
+  const invalidMsgElement = document.querySelector(`.invalid-${input.id}`);
+  invalidMsgElement.innerText = invalidMsg
+  invalidMsgElement.style.display = "block";
+  input.style.border = "2px solid #e54858"; 
+}
+
+/**
+ * This function hides the HTMLParagraphElement related to the the HTMLInputElement parameter
+ * It also removes the red border from the input
+ * @param {HTMLInputElement} input 
+ */
+function hideInvalidMsg(input) {
+  const invalidMsgElement = document.querySelector(`.invalid-${input.id}`);
+  invalidMsgElement.style.display = "none";
+  input.style.border = "none"
+}
+
+/**
+ * This function checks birthdate validity
+ * It returns false if no birthdate value
+ * It returns false if birthdate is in the future or if birthdate is before 120 years
+ * @param {HTMLInputElement} dateInput 
+ * @returns {boolean}
+ */
+function birthdateIsValid(dateInput) {
+  const dateToday = new Date;
+  const date120YearsAgo = new Date(new Date().setFullYear(dateToday.getFullYear() - 120));
+  if (dateInput.value) {
+    const birthdateIsInFuture = dateInput.valueAsDate.getTime() > dateToday.getTime();
+    const birthdateIsTooOld = dateInput.valueAsDate.getTime() < date120YearsAgo.getTime();
+    return birthdateIsInFuture || birthdateIsTooOld ? false : true
+  } else {
+    return false
+  }
+}
+
+// 2. SET INPUTS DATAS AND METHODS
+
+/**
+ *  Inputs datas and methods
+ */ 
+const inputs = [
+  { 
+    id: "firstName",
+    regex: new RegExp(/^[\w'\-,.][^0-9_!¡?÷?¿/\\+=@#$%ˆ&*(){}|~<>;:[\]]{1,29}$/),
+    falsyMsg: "Votre prénom doit être composé de 2 à 30 caractères. Les chiffres et symboles spéciaux ne sont pas valides.",
+    valueIsFalsy: (inputEl, regex) => !isEmpty(inputEl) && !regex.test(inputEl.value),
+    unfilledMsg: "Veuillez compléter ce champ.",
+    isNotFilled: (inputEl) => isEmpty(inputEl),
+    isValid: (inputEl, regex) => !isEmpty(inputEl) && regex.test(inputEl.value)
+  },
+  { 
+    id: "lastName",
+    regex: new RegExp(/^[\w'\-,.][^0-9_!¡?÷?¿/\\+=@#$%ˆ&*(){}|~<>;:[\]]{1,29}$/),
+    falsyMsg: "Votre nom doit être composé de 2 à 30 caractères. Les chiffres et symboles spéciaux ne sont pas valides.",
+    valueIsFalsy: (inputEl, regex) => !isEmpty(inputEl) && !regex.test(inputEl.value),
+    unfilledMsg: "Veuillez compléter ce champ.",
+    isNotFilled: (inputEl) => isEmpty(inputEl),
+    isValid: (inputEl, regex) => !isEmpty(inputEl) && regex.test(inputEl.value)
+  },
+  {
+    id:"email",
+    regex: new RegExp(/^[\w\-.+]+@([\w-]+\.)+[\w-]{2,3}$/),
+    falsyMsg: "Votre email doit respecter un format valide. Exemple: john.doe@mail.com.",
+    valueIsFalsy: (inputEl, regex) => !isEmpty(inputEl) && !regex.test(inputEl.value),
+    unfilledMsg: "Veuillez compléter ce champ.",
+    isNotFilled: (inputEl) => isEmpty(inputEl),
+    isValid: (inputEl, regex) => !isEmpty(inputEl) && regex.test(inputEl.value)
+  },
+  {
+    id:"birthdate",
+    regex: new RegExp(/^\d{4}\-\d{2}\-\d{2}$/),
+    falsyMsg: "Veuillez respecter un format de date valide type JJ/MM/AAAA. Si votre année de naissance est antérieure à 120 ans vous ne jouez probablement plus au jeux vidéos. Si  votre année de naissance est ultérieure à l'année actuelle vous n'y jouez probablement pas encore.",
+    valueIsFalsy: (inputEl, regex) => !isEmpty(inputEl) && (!regex.test(inputEl.value) || !birthdateIsValid(inputEl)),
+    unfilledMsg: "Veuillez compléter ce champ.",
+    isNotFilled: (inputEl) => isEmpty(inputEl),
+    isValid: (inputEl, regex) => !isEmpty(inputEl) && regex.test(inputEl.value) && birthdateIsValid(inputEl)
+  },
+  {
+    id:"tournaments-qty",
+    regex: new RegExp(/^([0-9]|[1-9][0-9])$/),
+    falsyMsg: "Le nombre de tournois doit être compris entre 0 et 99.",
+    valueIsFalsy: (inputEl, regex) => !isEmpty(inputEl) && !regex.test(inputEl.value),
+    unfilledMsg: "Veuillez compléter ce champ.",
+    isNotFilled: (inputEl) => isEmpty(inputEl),
+    isValid: (inputEl, regex) => !isEmpty(inputEl) && regex.test(inputEl.value)
+  },
+  {
+    id:"locationFieldset",
+    unfilledMsg: "Veuillez sélectionner une option.",
+    isNotFilled: () => !document.querySelector("input[type=radio]:checked"),
+    isValid: () => document.querySelector("input[type=radio]:checked"),
+  },
+  {
+    id:"checkbox1",
+    unfilledMsg: "Veuillez accepter les conditions d'utilisation.",
+    isNotFilled: (inputEl) => !inputEl.checked,
+    isValid: (inputEl) => inputEl.checked
+  },
+]
+
+
+// 3. GLOBAL FORM VALIDATION FUNCTIONS
+
+/**
+ * Events handler to show or hide invalid messages
+ */
+function handleInvalidMessages() {
+  const form   = document.querySelector("form");
+  inputs.forEach(input => {
+    const inputEl = document.getElementById(input.id)
+    form.addEventListener("submit", (e) => {
+      e.preventDefault()
+      if (input.isNotFilled(inputEl)) displayInvalidMsg(inputEl, input.unfilledMsg)
+    })
+    switch (input.id) {
+      case "firstName": case "lastName": case "email": case "tournaments-qty": case"birthdate":
+        inputEl.addEventListener("focusout", () => {
+          if (input.valueIsFalsy(inputEl, input.regex)) displayInvalidMsg(inputEl, input.falsyMsg)
+        })
+        inputEl.addEventListener("input", () => { 
+          if (!input.valueIsFalsy(inputEl, input.regex)) hideInvalidMsg(inputEl);
+        })
+        break
+      case "locationFieldset": 
+        const radioBtns = form.querySelectorAll("input[type=radio]");
+        radioBtns.forEach(btn => btn.addEventListener("click", () => hideInvalidMsg(inputEl)))
+        break
+      case "checkbox1":
+        inputEl.addEventListener("click", () => hideInvalidMsg(inputEl))
+        break
+    }
+  })
+}
+
+/**
+ * Add or delete HTMLInputElement IDs to a set (a set store unique values) on input event. 
+ * @param {Set} set 
+ */
+function identifyValidInputs(set) {
+  inputs.forEach(input => {
+    const inputEl = document.getElementById(input.id)
+    inputEl.addEventListener("input", () => {
+      input.isValid(inputEl, input.regex) ? set.add(input.id) : set.delete(input.id);
+    })
+  })
+}
+
+/**
+ * Reset validInputsSet when modal is closed
+ * @param {Set} set 
+ */
+function resetValidInputsOnModalClose(set) {
+  const closeModalButtons = document.querySelectorAll(".close-modal-btn");
+  closeModalButtons.forEach((btn) => btn.addEventListener("click", () => set.clear()))
+}
+
+
+// 4. INITIALIZE VALIDATION
+
+/**
+ * Global validation initialization function 
+ */
+function initValidation() {
+  const form   = document.querySelector("form");
+  const validInputsSet = new Set([]);
+  
+  preventEnterInvalidDateFormat()
+  handleInvalidMessages()
+  identifyValidInputs(validInputsSet);
+  resetValidInputsOnModalClose(validInputsSet)
+
+  /**
+   * Change the background color of the submit button to green if all inputs are valid on input event on any input element
+   * If there is one or more invalid fields the button color is reset to grey 
+   * This allows the user to benefit from a visual indication on the form validity
+   */
+  const submitBtn = document.querySelector(".btn-submit");
+  form.addEventListener("input", () => {
+    validInputsSet.size === 7 ? submitBtn.style.background = "#279e7a" : submitBtn.style.background = "grey"
+  })
+
+  // Displays a message to confirm subscription to the user on submit event if form is valid
+  const subConfirmation = document.querySelector(".confirmation")
+  form.addEventListener("submit", (e) => {
+    e.preventDefault()
+    if (validInputsSet.size === 7) {
+      form.style.display = "none"
+      subConfirmation.style.display = "block"
+      validInputsSet.clear() // Reset valid inputs set
+    }
+  })
+}
+
+initValidation()
