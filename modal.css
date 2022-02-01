@@ -576,7 +576,8 @@ footer {
   }
   .hero-img img {
     border-radius: 10px;
-    margin-top: 40px;
+    max-width: 90%;
+    margin: 40px auto 0 auto;
   }
   .hero-section > .btn-signup {
     display: block;
