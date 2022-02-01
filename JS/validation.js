@@ -101,8 +101,8 @@ function setupFirstNameInput() {
     validInputCond() ? validInputsSet.add(firstNameInput.id) : validInputsSet.delete(firstNameInput.id);
   })
   form.addEventListener("submit", () => {
-    if (isEmpty(firstNameInput)) displayInvalidMsg(firstNameInput, "Ce champ est requis pour pouvoir soumettre le formulaire.")
-    else if (displayErrorMsgCond()) displayInvalidMsg(firstNameInput, errorMsg)
+    if (isEmpty(firstNameInput)) return displayInvalidMsg(firstNameInput, "Ce champ est requis pour pouvoir soumettre le formulaire.")
+    if (displayErrorMsgCond()) displayInvalidMsg(firstNameInput, errorMsg)
   }) 
 }
 
@@ -122,8 +122,8 @@ function setupLastNameInput() {
     validInputCond() ? validInputsSet.add(lastNameInput.id) : validInputsSet.delete(lastNameInput.id);
   })
   form.addEventListener("submit", () => {
-    if (isEmpty(lastNameInput)) displayInvalidMsg(lastNameInput, "Ce champ est requis pour pouvoir soumettre le formulaire.")
-    else if (displayErrorMsgCond()) displayInvalidMsg(lastNameInput, errorMsg)
+    if (isEmpty(lastNameInput)) return displayInvalidMsg(lastNameInput, "Ce champ est requis pour pouvoir soumettre le formulaire.")
+    if (displayErrorMsgCond()) displayInvalidMsg(lastNameInput, errorMsg)
   }) 
 }
 
@@ -143,8 +143,8 @@ function setupEmailInput() {
     validInputCond() ? validInputsSet.add(emailInput.id) : validInputsSet.delete(emailInput.id);
   })
   form.addEventListener("submit", () => {
-    if (isEmpty(emailInput)) displayInvalidMsg(emailInput, "Ce champ est requis pour pouvoir soumettre le formulaire.")
-    else if (displayErrorMsgCond()) displayInvalidMsg(emailInput, errorMsg)
+    if (isEmpty(emailInput)) return displayInvalidMsg(emailInput, "Ce champ est requis pour pouvoir soumettre le formulaire.")
+    if (displayErrorMsgCond()) displayInvalidMsg(emailInput, errorMsg)
   }) 
 }
 
@@ -165,8 +165,8 @@ function setupBirthdateInput() {
     validInputCond() ? validInputsSet.add(birthdateInput.id) : validInputsSet.delete(birthdateInput.id);
   })
   form.addEventListener("submit", () => {
-    if (isEmpty(birthdateInput)) displayInvalidMsg(birthdateInput, "Ce champ est requis pour pouvoir soumettre le formulaire.")
-    else if (displayErrorMsgCond()) displayInvalidMsg(birthdateInput, errorMsg)
+    if (isEmpty(birthdateInput)) return displayInvalidMsg(birthdateInput, "Ce champ est requis pour pouvoir soumettre le formulaire.")
+    if (displayErrorMsgCond()) displayInvalidMsg(birthdateInput, errorMsg)
   }) 
 }
 
@@ -186,8 +186,8 @@ function setupTournamentsQtyInput() {
     validInputCond() ? validInputsSet.add(tournamentsQtyInput.id) : validInputsSet.delete(tournamentsQtyInput.id);
   })
   form.addEventListener("submit", () => {
-    if (isEmpty(tournamentsQtyInput)) displayInvalidMsg(tournamentsQtyInput, "Ce champ est requis pour pouvoir soumettre le formulaire.")
-    else if (displayErrorMsgCond()) displayInvalidMsg(tournamentsQtyInput, errorMsg)
+    if (isEmpty(tournamentsQtyInput)) return displayInvalidMsg(tournamentsQtyInput, "Ce champ est requis pour pouvoir soumettre le formulaire.")
+    if (displayErrorMsgCond()) displayInvalidMsg(tournamentsQtyInput, errorMsg)
   }) 
 }
 

@@ -14,7 +14,6 @@ body {
   margin: 0;
   display: flex;
   flex-direction: column;
-  background-image: url("background.png");
   font-family: var(--font-default);
   font-size: 18px;
   max-width: 1300px;
@@ -36,6 +35,11 @@ img {
 }
 .header-logo {
     float: left;
+}
+@media screen and (max-width: 768px ) {
+  .header-logo  {
+    margin-right: 100%;
+  }
 }
 @media screen and (max-width: 540px ) {
   .header-logo img {
@@ -71,22 +75,15 @@ img {
 
 .topnav .icon {
   display: none;
+  position: absolute;
+  right: 20px;
+  top: 15px;
 }
 
 @media screen and (max-width: 768px) {
   .topnav a {display: none;}
   .topnav a.icon {
-    float: right;
     display: block;
-  }
-}
-
-@media screen and (max-width: 768px) {
-  .topnav.responsive {position: relative;}
-  .topnav.responsive .icon {
-    position: absolute;
-    right: 0;
-    top: 0;
   }
   .topnav.responsive a {
     float: none;
@@ -96,13 +93,15 @@ img {
 }
 
 
-
  @media screen and (max-width: 540px) {
   .topnav a {display: none;}
   .topnav a.icon {
     float: right;
     display: block;
-    
+    top: 10px;
+  }
+  .topnav a.active:first-child {
+    margin-top: 15px;
   }
 } 
 
@@ -116,6 +115,13 @@ main {
   margin: 1px 20px 15px;
   border-radius: 2rem;
   text-align: justify;
+}
+@media screen and (max-width: 640px) {
+  main {
+  padding-left: 0;
+  padding-right: 0;
+  margin: 0;
+  }
 }
 
 .modal-btn {
@@ -173,6 +179,13 @@ main {
   background-color: rgba(26, 39, 156, 0.4);
 }
 
+@media screen and (max-width: 640px) {
+  .bground {
+    background: none;
+    position: initial;
+  }
+}
+
 .content {
   margin: 5% auto;
   width: 90%;
@@ -185,6 +198,13 @@ main {
   position: relative;
   color: #fff;
   padding-top: 10px;
+}
+
+@media screen and (max-width: 640px) {
+  .content {
+    width: 100%;
+    max-width: none;
+  }
 }
 
 .modal-body {
@@ -232,8 +252,6 @@ input {
   color: #e54858;
   display: none;
 }
-
-
 
 .formData[data-error]::after {
   content: attr(data-error);
@@ -531,6 +549,7 @@ footer {
   padding-left: 2vw;
   padding-right: 2vw;
   margin: 0 20px;
+
 }
 @media screen and (max-width: 800px) {
   .hero-section {
@@ -599,4 +618,12 @@ footer {
   position: absolute;
   bottom: 20px;
   left: calc(50% - 85px)
+}
+
+.fa-bars {
+  color:#FF0000;
+}
+
+.icon:hover > .fa-bars {
+  color: white;
 }

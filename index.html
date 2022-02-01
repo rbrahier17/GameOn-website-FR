@@ -7,8 +7,8 @@
     <link rel="stylesheet" href="modal.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=DM+Sans" />
-    <script type="text/javascript" src="./JS/modal.js" defer></script>
-    <script type="text/javascript" src="./JS/validation.js" defer></script>
+    <script type="text/javascript" src="./js/modal.js" defer></script>
+    <script type="text/javascript" src="./js/validation-v2.js" defer></script>
   </head>
 
   <body>
@@ -58,7 +58,7 @@
           <!--close modal button-->
           <span class="close close-modal-btn"></span>
           <div class="modal-body">
-            <form id="registrationForm" name="reserve" action="index.html">
+            <form id="registrationForm" name="reserve" action="index.html" novalidate>
               
               <!------------user infos fieldset------------>
               <fieldset>
@@ -87,9 +87,9 @@
                 </div>
 
                 <div class="formData">
-                  <label for="quantity">À combien de tournois GameOn avez-vous déjà participé?</label>
-                  <input type="number" class="text-control main-field" id="quantity" name="quantity" />
-                  <p class="invalid-message invalid-quantity"></p>
+                  <label for="tournaments-qty">À combien de tournois GameOn avez-vous déjà participé?</label>
+                  <input type="number" class="text-control main-field" id="tournaments-qty" name="quantity" />
+                  <p class="invalid-message invalid-tournaments-qty"></p>
                 </div>
               </fieldset>
 
